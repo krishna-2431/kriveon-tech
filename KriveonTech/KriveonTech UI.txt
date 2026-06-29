@@ -1,0 +1,236 @@
+KriveonTech UI/UX Design Specification Document
+Document Owner: Principal Product Designer / Design Systems Architect
+Project: KriveonTech Official Website (Phase 1)
+Target Audience: UI/UX Designers, Frontend Engineers, QA Engineers
+1. Design Vision
+Overall Philosophy
+The design philosophy for KriveonTech centers on absolute precision, mimicking the rigorous engineering standards of the code we write. The aesthetic must immediately position KriveonTech alongside premium, modern tech brands (e.g., Stripe, Vercel, Linear). 
+Brand Personality
+Professional: Objective and expert. 
+Reassuring: Transparent processes that alleviate client anxiety. 
+Technical: Confident in deep engineering capabilities, from IoT to AI/ML. 
+User Emotions
+Visitors should feel a sense of relief and trust. They should feel they have discovered a high-end boutique agency rather than a commodity project center. 
+Design Principles
+Show, Don't Tell: Utilize architecture diagrams and component trees to illustrate clean code. 
+Zero Friction: Users must never have to search for a way to contact the company. 
+Predictability: Layouts should follow established SaaS patterns so users intuitively know where to find information. 
+Visual Goals
+To transition the brand perception from an academic project center to a professional software engineering agency through a premium dark-mode UI. 
+2. User Experience Goals
+Visitor Journey
+Discovery: Clean landing via SEO, immediately greeted by premium aesthetics. 
+Validation: Value proposition read against a backdrop of professional, dark-theme UI. 
+Education: Clear understanding of the 8-step process and deliverables (Code, GitHub, KT, Docs). 
+Conversion: Instant connection to an engineer via persistent "Chat on WhatsApp" or "Call Now" buttons. 
+Trust Building
+Explicitly list the 12 deliverables (Complete Source Code, DB Files, API Docs) to differentiate from competitors. 
+Prominently feature the "Knowledge Transfer Session" to alleviate post-delivery anxiety. 
+Information Hierarchy
+Flat and accessible hierarchy designed to prevent users from getting lost. 
+All critical paths must lead to direct contact actions. 
+Decision Making & Call-to-Action Strategy
+Eschew traditional lead-capture forms (no POST requests for leads). 
+Drive inbound inquiries exclusively through frictionless, direct Phone and WhatsApp channels. 
+Accessibility
+Strict adherence to WCAG 2.1 AA standards. 
+3. Design Language
+Minimalism & Spacing
+Generous padding (standard padding: 2rem) to allow content to breathe and feel luxurious. 
+Strict adherence to a 4-point grid system (standard in Tailwind CSS). 
+Typography
+A pairing of a premium geometric sans-serif for UI elements and a monospace font for technical accents. 
+Consistency & Hierarchy
+Utilize clear structural tags (<h1>, <h2>, <article>, <section>) for both visual hierarchy and semantic HTML requirements. 
+Motion & Interaction
+Smooth, declarative React animations using Framer Motion (essential for premium glassmorphic UI feels). 
+Visual Rhythm
+Glassmorphism: Subtle translucent backgrounds with background-blur (backdrop-blur-md, bg-white/5). 
+Borders: 1px subtle borders on cards (border-white/10). 
+Corners: Rounded UI elements with border-radius: 8px to 12px (Tailwind rounded-xl / 12px). 
+4. Color System
+KriveonTech utilizes a Modern Dark Mode exclusively. 
+Role
+Color Name
+HEX Value
+Usage
+Primary
+Electric Blue
+#007AFF
+Primary buttons, active states, key highlights. 
+Accent
+Deep Cyan
+#00B4D8
+Mixed with primary for soft gradient hover states. 
+Background Base
+Pure Dark
+#0A0A0A
+Main page backgrounds. 
+Surface 1
+Dark Gray 1
+#111111
+Card backgrounds, elevated surfaces. 
+Surface 2
+Glass White
+#FFFFFF
+Used at 5% opacity (bg-white/5) for glassmorphism. 
+Borders
+Subtle White
+#FFFFFF
+Used at 10% opacity (border-white/10) for 1px borders. 
+Text Primary
+White
+#FFFFFF
+High-emphasis text (Headings, primary body).
+Text Secondary
+Muted Gray
+#A1A1AA
+Low-emphasis text (Descriptions, captions).
+5. Typography System
+Font Families
+Primary (UI/Readability): Inter or Geist (Premium geometric sans-serif). 
+Secondary (Technical/Code): JetBrains Mono (Monospace). 
+Scale & Weights
+H1 (Hero): 4rem / 4.5rem (Desktop), 2.5rem (Mobile) | Bold (700) | Tracking: -0.02em
+H2 (Section): 3rem (Desktop), 2rem (Mobile) | SemiBold (600) | Tracking: -0.01em
+H3 (Card Title): 1.5rem | Medium (500) | Tracking: Normal
+Body (Primary): 1.125rem | Regular (400) | Line Height: 1.6
+Body (Secondary): 1rem | Regular (400) | Line Height: 1.5
+Code/Tech Accent: 0.875rem | JetBrains Mono Regular (400) | Line Height: 1.5. 
+6. Spacing System
+Based on the Tailwind CSS 4pt / 8pt grid system. 
+2px / 4px: Micro-adjustments, borders.
+8px (space-2): Inner component spacing (icon to text).
+16px (space-4): Standard element spacing.
+32px (space-8 / padding: 2rem): Standard container padding. 
+64px (space-16): Section vertical rhythm (Mobile).
+128px (space-32): Section vertical rhythm (Desktop).
+7. Layout System
+Breakpoints
+Mobile: < 768px (Single column grid). 
+Tablet: 768px - 1024px (2-column Bento boxes). 
+Desktop: > 1024px (3+ column grids, max container width 1280px). 
+Container Alignment
+Pages utilize a centered container layout with max-width boundaries to ensure readability on ultra-wide monitors.
+8. Iconography
+Library: Lucide Icons. 
+Style: Minimalist, geometric, consistent stroke.
+Stroke Width: 1.5px to 2px.
+Sizes: 16px (inline/buttons), 24px (standard), 32px (card headers), 48px (hero/timeline nodes).
+Usage: Clear, icon-driven lists for deep dives into services. 
+9. Imagery
+Illustration Style: Abstract 3D glassmorphic representations (e.g., code compiling into a hardware chip). 
+Graphics: Architecture diagrams and component trees to illustrate "Clean Code". 
+Asset Optimization: Optimized WebP images loading conditionally based on viewport size. 
+Tech Logos: Recognizable grid of logos for React, Node, Python, TensorFlow, ESP32, Raspberry Pi, AWS. 
+10. Component Library
+Primary Button
+Purpose: Main CTA ("Call Now").
+States: Default (Electric Blue background, white text), Hover (Glow), Active. 
+Focus: Visible focus ring (ring-2 ring-blue-500 ring-offset-2 ring-offset-background). 
+Secondary Button
+Purpose: Secondary actions ("Chat on WhatsApp" inline).
+States: Default (Transparent background, Electric Blue border), Hover (Solid), Active. 
+WhatsApp FAB
+Purpose: Persistent bottom-right floating action button for instant contact. 
+States: Default (Floating icon), Hover (Expand with text). 
+Accessibility: Must include explicit ARIA labels. 
+Interaction: Utilizes the wa.me API with pre-populated message templates. 
+Bento Card
+Purpose: Services and features overview. 
+Style: Glassmorphic (backdrop-blur-md, bg-white/5), 1px subtle borders, rounded 12px. 
+States: Default, Hover (Border highlight/glow). 
+Timeline Node
+Purpose: Visual indicator for the 8-step process. 
+States: Inactive, Active (Blue pulse). 
+Navbar (Sticky)
+Layout (Desktop): Logo (Left) | Home, Services, Process, FAQ (Center) | Call Now, WhatsApp (Right - Highlighted). 
+Layout (Mobile): Collapses into a clean hamburger menu. Requires ARIA label. 
+Footer
+Layout: Logo, Tagline | Quick Links | Legal (Privacy, Terms) | Contact Info (Phone numbers). 
+11. Motion Design
+Engine: Framer Motion. 
+Entrance Animations: Subtle fade-up (y: 20, opacity: 0 to 1) on scroll entry.
+Hover Animations:
+Primary Button: Drop shadow glow expansion.
+Bento Cards: Subtle border color shift and 2px upward translation. 
+WhatsApp FAB: Expands horizontally to reveal "Chat on WhatsApp" text. 
+Timeline Pulse: Infinite subtle scale/opacity pulsing on the active Timeline Node. 
+Accessibility: Respect prefers-reduced-motion CSS media queries. Disable translation/scale animations if true.
+12. Page Specifications
+General Guidelines for All Pages
+Goal: Provide zero-friction pathways to direct contact. 
+Visual Hierarchy: Clean typography, glassmorphic cards holding dense data, dark background ensuring high contrast. 
+13. Home Page Specification (/)
+Hero Section:
+Headline: Transforming Research into Real-World Engineering Solutions. 
+Subheadline: Production-quality implementations for academics, researchers, and innovators. 
+Visual: Abstract 3D glassmorphic representation of code compiling into a hardware chip. 
+CTAs: Primary (Call Now), Secondary (WhatsApp). 
+Social Proof: Client Logos / "Trusted by innovators from top institutions". 
+Services Overview: Bento Box Grid highlighting Software, Embedded/IoT, and Academic Solutions. 
+The KriveonTech Standard: A highly visual checklist highlighting deliverables like GitHub, Docs, Architecture, and KT. 
+Process Teaser: Condensed visual timeline of the 8-step process. 
+Final CTA: Section reading "Ready to build something exceptional?". 
+Services Page (/services)
+Deep dive into Software Development, Embedded & IoT, Academic Engineering using clear, icon-driven lists. 
+Process Page (/process)
+A visual, vertical timeline detailing all 8 steps: Requirement Analysis -> Planning -> Code Development -> Git Push -> KT -> Build & Testing -> Delivery -> Support. 
+Technologies Page (/technologies)
+Grid of recognizable tech logos (React, Node, Python, TensorFlow, ESP32, Raspberry Pi, AWS). 
+14. Responsive Design
+Mobile (<768px):
+Navigation collapses into a hamburger menu. 
+WhatsApp FAB is prominent and easily tappable with a thumb. 
+Grid layouts (Bento, Technologies) collapse to single columns. 
+Tablet (768px - 1024px):
+2-column Bento boxes. 
+Horizontal timeline becomes vertical. 
+Desktop (>1024px):
+Full horizontal navbar. 
+Horizontal timeline. 
+3+ column grids. 
+15. Accessibility
+Standards: WCAG 2.1 AA compliant. 
+Contrast: Electric Blue (#007AFF) on dark backgrounds must pass text contrast ratios. 
+Keyboard Navigation: All CTAs and links must be fully focusable with visible focus rings (ring-2 ring-blue-500). 
+ARIA Labels: Required on all icon-only buttons (WhatsApp FAB, Mobile Menu). 
+Semantic HTML: Strict use of <main>, <article>, <section>, and hierarchical headers to aid screen readers. 
+16. UX Writing Guidelines
+Tone: Objective, expert, reassuring, and precise. 
+Vocabulary: Use proper engineering terminology (e.g., "Source Code," "Architecture Diagram," "Knowledge Transfer," "IoT") to build immediate credibility. 
+Expectation Management: Explicitly state exclusions (e.g., "Project Report is NOT included") to perfectly manage user expectations. 
+CTA Wording: Keep it direct and action-oriented ("Call Now", "Chat on WhatsApp"). 
+17. Design Tokens
+color-bg-base: #0A0A0A
+color-bg-surface: #111111
+color-primary: #007AFF
+color-accent: #00B4D8
+color-border: rgba(255, 255, 255, 0.10)
+color-glass: rgba(255, 255, 255, 0.05)
+font-sans: 'Inter', sans-serif (or Geist) 
+font-mono: 'JetBrains Mono', monospace
+radius-md: 8px
+radius-lg: 12px
+spacing-base: 2rem (Standard padding) 
+18. Interaction Design
+Hover: Glassmorphic elements receive a subtle border highlight; Primary buttons receive an Electric Blue glow. 
+Focus: Keyboard focus outlines (ring-2 ring-blue-500 ring-offset-2 ring-offset-background) triggered on :focus-visible. 
+Transitions: All color, border, and shadow changes utilize a 150ms ease-in-out transition.
+19. Future Design System (Phase 2 Roadmap)
+The design system is constructed purely with decoupled components (Tailwind + shadcn/ui + Next.js App Router). This enables seamless scaling for Phase 2 without major refactoring, supporting: 
+Client Portal: Secure login area to track the 8-step project lifecycle in real-time. 
+Admin Dashboard: Internal management for inquiries and project statuses. 
+Portfolio / Case Studies: Detailed architectural breakdowns of non-NDA projects. 
+Payment Gateway: Integration for initial milestone payments securely. 
+20. Design QA Checklist
+[ ] Does the UI strictly adhere to the Modern Dark Mode theme (#0A0A0A to #111111)? 
+[ ] Are all primary actions styled in Electric Blue (#007AFF)? 
+[ ] Is the padding inside Bento Cards generous (min 2rem)? 
+[ ] Are the borders set to a subtle 1px (border-white/10)? 
+[ ] Does the typography correctly mix Inter/Geist (UI) and JetBrains Mono (Code/Accents)? 
+[ ] Is the WhatsApp FAB persistently fixed to the bottom right and functioning via wa.me? 
+[ ] Are there zero lead-capture form POST requests on the site? 
+[ ] Do all interactive elements have an ARIA label (especially the FAB and Mobile Menu)? 
+[ ] Does the color contrast pass WCAG 2.1 AA standards? 
+[ ] Are SVGs and Next/Images loading WebP conditionally based on viewport? 

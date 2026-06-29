@@ -1,0 +1,220 @@
+KriveonTech Official Website: Technical Requirements Document (TRD)
+Document Owner: Principal Software Architect / Staff Full Stack Engineer
+Project: KriveonTech Official Website (Phase 1)
+Status: Production-Ready for Engineering Team
+1. Executive Summary
+This Technical Requirements Document (TRD) outlines the architectural, structural, and implementation guidelines for the official KriveonTech website. The platform serves as a high-performance, premium digital storefront designed to transition KriveonTech's brand perception to a professional software engineering agency. 
+In Phase 1, this application operates strictly as an informational and lead-generation engine without a backend database, user authentication, or data collection forms. The engineering focus is on maximum performance, Search Engine Optimization (SEO), and zero-friction lead generation utilizing direct communication channels (Click-to-Call and Click-to-WhatsApp). 
+2. Overall System Architecture
+The system utilizes a modern, edge-deployed Jamstack architecture relying on Next.js 15 for Server-Side Rendering (SSR) and Static Site Generation (SSG).
+Code snippet
+graph TD
+    Client[Client Device / Browser] -->|HTTPS Request| Edge[Vercel Edge Network / CDN]
+    Edge -->|Cache Hit| Static[Static Assets / SSG Pages]
+    Edge -->|Cache Miss| Node[Next.js Server / App Router]
+    
+    Node --> Content[Local JSON/Markdown Content]
+    Node --> Analytics[GA4 & MS Clarity Scripts]
+    
+    Static --> Client
+    Node --> Client
+    
+    Client -->|wa.me API| WhatsApp[WhatsApp Application]
+    Client -->|tel: Protocol| Phone[Phone Dialer]
+Frontend: Next.js 15 (App Router) with React 19.
+Hosting & CDN: Vercel Edge Network for global low-latency access. 
+Analytics: Google Analytics 4 and Microsoft Clarity (client-side injection).
+Static Assets: Next.js Image optimization (next/image) serving WebP assets conditionally. 
+3. Technology Stack Justification
+Technology
+Purpose
+Justification & Alternatives
+Next.js 15 (App Router)
+Framework
+Provides unparalleled SSG/SSR capabilities for SEO, out-of-the-box routing, and Metadata APIs. Alternative: Astro (good for static, but Next.js offers an easier migration path for Phase 2 dashboards).
+React 19
+UI Library
+Leverages Server Components to minimize client JavaScript bundle size.
+TypeScript
+Type Safety
+Eliminates runtime type errors and improves developer velocity via autocomplete and strict contracts.
+Tailwind CSS
+Styling
+Utility-first CSS allows rapid UI development, matching the strict design tokens without bloated stylesheets.
+shadcn/ui
+Component Base
+Provides accessible, unstyled, and customizable Radix UI primitives. Avoids vendor lock-in compared to component libraries like MUI.
+Framer Motion
+Animations
+Industry standard for smooth, declarative React animations (essential for premium glassmorphic UI feels).
+Vercel
+Deployment
+Native support for Next.js, zero-config edge caching, and seamless GitHub CI/CD integration. 
+4. Project Folder Structure
+The project follows a strict, domain-driven Next.js app/ directory structure.
+Plaintext
+kriveontech-web/
+├── app/
+│   ├── (marketing)/           # Route group for marketing pages
+│   │   ├── about/page.tsx
+│   │   ├── contact/page.tsx
+│   │   ├── faq/page.tsx
+│   │   ├── process/page.tsx
+│   │   ├── services/page.tsx
+│   │   ├── technologies/page.tsx
+│   │   ├── why-choose-us/page.tsx
+│   │   └── page.tsx           # Home page
+│   ├── (legal)/               # Route group for legal pages
+│   │   ├── privacy-policy/page.tsx
+│   │   └── terms/page.tsx
+│   ├── not-found.tsx          # Custom 404
+│   ├── layout.tsx             # Root layout (Navbar/Footer)
+│   ├── global.css             # Tailwind & theme variables
+├── components/
+│   ├── ui/                    # shadcn/ui generic primitives (buttons, cards)
+│   ├── layout/                # Navbar, Footer, MobileMenu
+│   ├── sections/              # Hero, BentoGrid, Timeline, CtaBanner
+│   └── shared/                # WhatsAppFAB, CustomIcons
+├── config/                    # Environment variables validation, site config
+├── content/                   # JSON data for FAQ, Services, Process
+├── hooks/                     # Custom React hooks (e.g., useScroll, useMediaQuery)
+├── lib/                       # Utility functions (cn, analytics trackers)
+├── public/                    # Static assets (fonts, images, svgs)
+└── types/                     # Global TypeScript interfaces
+5. Routing Architecture
+Routing is handled entirely by the Next.js App Router using file-system-based routes. 
+Route
+Implementation Strategy
+/
+app/page.tsx. SSG. Pre-fetches critical viewport images.
+/services
+app/services/page.tsx. SSG. Renders from local content/services.json.
+/process
+app/process/page.tsx. SSG. Timeline component mapped from JSON. 
+/technologies
+app/technologies/page.tsx. SSG. Grid of tech logos. 
+/faq
+app/faq/page.tsx. SSG. Generates FAQ Schema.org JSON-LD dynamically.
+/* (Other Pages)
+Standard SSG implementation.
+/404
+app/not-found.tsx. Catch-all for broken links, routing users back home.
+Metadata Strategy: Every page.tsx exports a metadata object utilizing the Next.js Metadata API for unique <title> and <meta name="description">. 
+6. Component Architecture
+All components default to React Server Components (RSC) to reduce client bundle size. The "use client" directive is restricted strictly to components requiring interactivity.
+Server Components: Hero, Footer, Timeline, ServiceCards, Layout, content sections.
+Client Components: Navbar (for mobile toggle and scroll state), WhatsAppFAB (for hover states and dynamic URL generation), BentoCard (for Framer Motion hover animations). 
+Reusable Components Highlights
+PrimaryButton: Electric Blue background, white text, glow on hover. 
+WhatsAppFAB: Fixed position (bottom right), ARIA-labeled, expands on hover. 
+TimelineNode: Circular indicator for the 8-step process, active blue pulse animation. 
+7. State Management
+Given the lack of user authentication or shopping carts, global state management (e.g., Redux, Zustand) is not required.
+Client-Side State: Handled via standard React useState and useContext (if needed for theme/mobile menu).
+Component Rendering: Leverage Next.js Server Components. Pages fetch JSON content sequentially on the server and pass plain objects to client components if interaction is required.
+8. Content Management Strategy
+For Phase 1, a headless CMS is an over-engineering risk. Content will be managed via static local files.
+Format: Strongly typed JSON arrays inside the content/ directory.
+Images: Visuals and logos are stored in public/assets/ and referenced in JSON.
+Future-proofing: The UI components are decoupled from the data layer. Transitioning to a CMS (e.g., Sanity, Contentful) in Phase 2 only requires swapping the JSON import for a fetch call in the page-level Server Component.
+9. SEO Architecture
+SEO is a primary driver for the targeted personas.
+Next.js Metadata: Implementation of Open Graph (og:title, og:image) and Twitter Cards.
+Structured Data (JSON-LD):
+Organization & LocalBusiness schemas injected into app/layout.tsx.
+Service schema injected into /services.
+FAQPage schema injected into /faq. 
+Robots & Sitemap: Automated generation using app/sitemap.ts and app/robots.ts.
+Semantic HTML: Strict adherence to hierarchical <h1-h6> tags, <main>, <article>, and <section> structures. 
+10. Performance Strategy
+To hit the target of 95+ Mobile/Desktop Lighthouse scores: 
+Image Optimization: All raster images must use <Image/> from next/image for WebP conversion and lazy loading. SVGs used for icons (Lucide). 
+Font Optimization: next/font/google used to preload Inter/Geist and JetBrains Mono, eliminating FOIT (Flash of Invisible Text). 
+Code Splitting: Native to Next.js App router.
+Third-party Scripts: Analytics loaded via next/script using strategy="lazyOnload".
+11. Accessibility (WCAG 2.1 AA)
+Color Contrast: The primary Electric Blue (#007AFF) and dark backgrounds (#0A0A0A to #111111) must pass AA contrast ratios. 
+Keyboard Navigation: All CTAs (<a>, <button>) must have explicit :focus-visible ring styling (e.g., ring-2 ring-blue-500 ring-offset-2 ring-offset-background).
+ARIA Labels: Mandatory for icon-only elements like the WhatsApp FAB and hamburger menu. 
+12. Responsive Design
+Follow a mobile-first Tailwind approach based on predefined breakpoints: 
+Device
+Breakpoint
+Layout Adjustments
+Mobile
+< 768px
+Single column grid, hamburger menu, sticky bottom WhatsApp FAB. 
+Tablet
+768px - 1024px
+2-column Bento boxes, horizontal timeline becomes vertical.
+Desktop
+> 1024px
+3+ column grids, horizontal timeline, full navbar.
+13. UI Engineering Standards
+Derived visually from the brand poster (WhatsApp Image 2026-06-24 at 6.15.00 PM.jpeg) and PRD specs:
+Theme: Modern Dark Mode exclusively (#0A0A0A to #111111). 
+Colors:
+Primary: Electric Blue (#007AFF). 
+Accent: Deep Cyan gradient for hover states. 
+Typography: Inter/Geist for UI readability, JetBrains Mono for technical emphasis and code blocks. 
+Design Language: Glassmorphism (backdrop-blur-md, bg-white/5), 1px subtle borders (border-white/10), rounded corners (rounded-xl / 12px). 
+Spacing: Implement a strict 4-point grid system (Tailwind defaults).
+14. Contact Integration
+The core conversion mechanism relies on zero-friction, direct contact. 
+WhatsApp: Utilizing the wa.me API. Links will be dynamically generated based on page context.
+Implementation: [https://wa.me/917670865257?text=Hi%20KriveonTech,%20I%20am%20interested%20in](https://wa.me/917670865257?text=Hi%20KriveonTech,%20I%20am%20interested%20in)...
+Click-to-Call: Native anchor links using the tel: protocol for +91 76708 65257 and +91 90140 12864. 
+Click-to-Email: mailto: protocol.
+15. Analytics & Event Tracking
+Given the absence of forms, macro-conversions are measured via click events on contact links. 
+Create a custom utility trackEvent(eventName, properties) mapping to GA4 data layer.
+Events to track:
+click_whatsapp_fab
+click_call_header
+view_service_modal
+scroll_depth_timeline
+16. Security
+Headers: Implement Next.js headers() in next.config.js to enforce strict Security Headers:
+Strict-Transport-Security (HSTS). 
+X-Frame-Options (DENY).
+X-Content-Type-Options (nosniff).
+Content-Security-Policy (CSP) restricting scripts to self and approved analytics domains. 
+Data Validation: While no POST forms exist, ensure any future URL parameters are strictly validated to prevent Reflected XSS.
+17. Testing Strategy
+Linting/Formatting: Strict ESLint and Prettier configs enforced via Husky pre-commit hooks.
+Component Testing: React Testing Library for verifying complex UI logic (e.g., FAB expansion).
+E2E Testing: Playwright script to verify critical paths:
+Navigation loads.
+Click-to-call links contain the tel: protocol.
+WhatsApp links contain correct wa.me host.
+Performance: Automated Lighthouse CI in GitHub Actions targeting 95+ across all metrics. 
+18. Deployment Pipeline
+Version Control: GitHub repository.
+Branching: main (Production), develop (Staging), feature/*.
+CI/CD: Vercel automatically deploys preview environments for every Pull Request. Merges to main trigger production deployments. 
+Rollback: Vercel instant rollback capability via atomic deployments.
+19. Coding Standards
+TypeScript: strict mode enabled. No any types permitted.
+Naming Conventions:
+Components: PascalCase.tsx
+Utilities/Hooks: camelCase.ts
+CSS/Tailwind: BEM-inspired utility grouping (using clsx and tailwind-merge via a cn() utility).
+Import Order: External libraries -> Absolute internal paths -> Relative paths -> CSS/Styles. Enforced via eslint-plugin-simple-import-sort.
+20. Future Scalability
+Phase 1 establishes a fast, static base. The architecture supports Phase 2 requirements (Client Portal, Admin Dashboard, Payment Gateway) without major refactoring: 
+Next.js App Router seamlessly handles adding dynamic loading.tsx and Server Actions for form POSTs.
+Authentication (e.g., NextAuth.js/Clerk) can be wrapped via a Provider in layout.tsx for protected routes (/dashboard).
+Database integration (e.g., PostgreSQL via Prisma/Drizzle) can be instantiated securely within React Server Components.
+21. Risks & Mitigations
+Risk
+Impact
+Mitigation Strategy
+Inaccurate Conversion Tracking
+Low accuracy tracking ROAS on Google Ads due to lack of a "Thank You" page. 
+Implement precise click-event listeners on all tel: and wa.me links via GTM/GA4.
+WhatsApp Spam
+Exposing raw WhatsApp numbers can invite automated spam. 
+Use dynamic messaging templates requiring user intent. Monitor traffic; if severe, consider a basic captcha-gated redirect in Phase 1.5.
+Hydration Mismatches
+Next.js throws errors if client HTML differs from server HTML.
+Avoid relying on window object in initial render without checking useEffect or dynamic imports with ssr: false.

@@ -1,0 +1,166 @@
+Product Requirements Document (PRD): KriveonTech Official Website
+Document Owner: Senior Product Manager
+Target Audience: Product Designers, UI/UX, Frontend & Backend Engineers, Project Managers
+Status: Production-Ready
+1. Executive Summary
+KriveonTech requires a premium, high-converting digital storefront to transition its brand perception from an academic project center to a professional software engineering agency. The website will serve as an authoritative portfolio and lead-generation engine. Distinctively, this platform will eschew traditional lead-capture forms in favor of zero-friction, direct-communication channels (Phone and WhatsApp) to maximize conversion rates and immediate client engagement.
+2. Product Vision
+To be the most trusted and technically revered engineering partner for students, researchers, and startups, bridging the gap between theoretical academic research and production-grade software/hardware solutions.
+3. Product Mission
+Deliver a digital experience that mirrors the precision, quality, and modern architecture of the code we write, educating our audience on our rigorous engineering standards while providing frictionless avenues for project consultation.
+4. Business Objectives
+Brand Elevation: Position KriveonTech alongside modern, premium tech brands (e.g., Stripe, Vercel).
+Trust Generation: Clearly communicate the 8-step project lifecycle and standard deliverables (GitHub repo, architecture diagrams, KT sessions).
+Frictionless Lead Generation: Drive inbound inquiries exclusively through direct Phone and WhatsApp channels.
+5. Success Metrics
+Metric
+Description
+Target
+Primary CTA Conversion
+Click-through rate on "Call Now" / "WhatsApp" buttons.
+> 8% of unique visitors
+Bounce Rate
+Percentage of users leaving without interaction.
+< 40%
+Time on Site
+Average session duration.
+> 2 minutes
+Core Web Vitals
+LCP, FID, CLS scores.
+95+ Mobile/Desktop (Lighthouse)
+6. User Personas
+Persona 1: The Stressed Academic (B.Tech/M.Tech Student)
+Needs: Implementation of a complex IEEE paper, clean source code, and a comprehensive Knowledge Transfer (KT) session to survive their Viva.
+Behavior: Skims for specific tech stacks (e.g., Python, IoT) and looks for proof of reliability.
+Persona 2: The Innovator (Researcher/Startup Founder)
+Needs: A functional prototype or MVP based on proprietary research.
+Behavior: Evaluates the agency's professional standards, architecture diagrams, and testing methodologies.
+7. User Journey
+Discovery: User lands on the homepage via SEO or direct link.
+Validation: User sees the premium dark-mode UI, reads the value proposition, and feels reassured by the professional aesthetic.
+Education: User scrolls to the "Development Process" and "Deliverables" sections, understanding exactly what they get (Code, GitHub, KT, Docs).
+Conversion: User clicks the sticky "Chat on WhatsApp" or "Call Now" button.
+Resolution: User is instantly connected to a KriveonTech engineer.
+8. Pain Points (Addressed by the Product)
+Competitor Sites look cheap: Users fear getting scammed or receiving plagiarized code. Solution: Premium UI and transparent workflow.
+Forms are tedious: Users don't want to wait 48 hours for a quote. Solution: Direct WhatsApp/Phone routing.
+Lack of understanding: Users fear they won't understand the code they buy. Solution: Highlighting the dedicated Knowledge Transfer (KT) deliverable.
+9. User Stories
+As a visitor, I want to see a clear list of deliverables so I know exactly what I am paying for.
+As a visitor, I want to contact the team immediately without filling out a form, so I can get my questions answered fast.
+As a mobile user, I want the WhatsApp button to open my app directly with a pre-filled greeting.
+As an engineering student, I want to see the specific hardware and software technologies KriveonTech supports.
+10. Functional Requirements
+Dynamic CTA Routing: "Chat on WhatsApp" buttons must utilize the wa.me API with pre-populated message templates based on the page context.
+Sticky Contact Bar: A persistent header or floating action button (FAB) for instant contact on mobile devices.
+No Form Inputs: The system architecture must not include any user-facing input forms (no POST requests for leads).
+Responsive Asset Loading: SVGs and optimized WebP images must load conditionally based on viewport size.
+11. Non-Functional Requirements
+Hosting & Deployment: Deployed on edge networks (e.g., Vercel or Cloudflare Pages) for global low-latency access.
+Security: Enforced HTTPS, strict Content Security Policy (CSP), and HSTS.
+Maintainability: Built with a modern component-based framework (e.g., Next.js, React) to allow easy content updates.
+12. Information Architecture
+A flat, highly accessible hierarchy designed to prevent users from getting lost. All critical paths lead to the Contact actions.
+13. Navigation Structure
+Header (Sticky): Logo (Left) | Home, Services, Process, FAQ (Center) | Call Now, WhatsApp (Right - Highlighted)
+Footer: Logo, Tagline | Quick Links | Legal (Privacy, Terms) | Contact Info (Phone numbers).
+14. Complete Sitemap
+/ (Home)
+/about (About Us)
+/services (Services)
+/technologies (Technologies)
+/process (Development Process)
+/why-choose-us (Why Choose Us)
+/faq (FAQs)
+/contact (Contact)
+/privacy-policy (Privacy Policy)
+/terms (Terms & Conditions)
+/404 (Custom Error Page)
+15. Page-by-Page Requirements & Section Breakdown
+15.1 Home Page (/)
+Hero Section:
+Headline: Transforming Research into Real-World Engineering Solutions.
+Subheadline: Production-quality implementations for academics, researchers, and innovators.
+Visual: Abstract 3D glassmorphic representation of code compiling into a hardware chip.
+CTA: Primary (Call Now), Secondary (WhatsApp).
+Client Logos / Social Proof (Optional but recommended): "Trusted by innovators from top institutions."
+Services Overview (Bento Box Grid): Highlighting Software, Embedded/IoT, and Academic Solutions.
+The KriveonTech Standard (Deliverables): A highly visual checklist (GitHub, Docs, Architecture, KT).
+Process Teaser: A condensed timeline of the 8-step process.
+Final CTA Section: "Ready to build something exceptional?"
+15.2 Services (/services)
+Deep dive into categories: Software Development (Web, App, AI/ML), Embedded & IoT, Academic Engineering. Use clear, icon-driven lists.
+15.3 Development Process (/process)
+A visual, vertical timeline detailing the 8 steps: Requirement Analysis -> Planning -> Code Development -> Git Push -> KT -> Build & Testing -> Delivery -> Support.
+15.4 Technologies (/technologies)
+A grid of recognizable tech logos (React, Node, Python, TensorFlow, ESP32, Raspberry Pi, AWS).
+16. Component Inventory
+Component
+Description
+States
+Primary Button
+Electric Blue background, white text.
+Default, Hover (Glow), Active
+Secondary Button
+Transparent background, Electric Blue border.
+Default, Hover (Solid), Active
+WhatsApp FAB
+Floating WhatsApp icon, bottom right.
+Default, Hover (Expand with text)
+Bento Card
+Glassmorphic card for services/features.
+Default, Hover (Border highlight)
+Timeline Node
+Circular icon indicator for process steps.
+Inactive, Active (Blue pulse)
+17. Content Strategy
+Tone: Objective, expert, reassuring, and precise.
+Vocabulary: Use proper engineering terminology (e.g., "Source Code," "Architecture Diagram," "Knowledge Transfer," "IoT") to build immediate credibility with technical audiences.
+Exclusions: Explicitly state what is not included (e.g., "Project Report is NOT included") to manage expectations perfectly.
+18. SEO Requirements
+Metadata: Unique <title> and <meta name="description"> for every page targeting keywords like "IEEE paper implementation," "custom software engineering," "IoT project development."
+Schema Markup: Implement LocalBusiness and Service JSON-LD schema.
+Semantic HTML: Strict use of <h1>, <h2>, <article>, <section> tags.
+19. Accessibility Requirements (WCAG 2.1 AA)
+Contrast: Ensure the Electric Blue on Dark Background passes contrast ratios for text.
+Keyboard Navigation: All CTAs and links must be fully focusable with visible focus rings.
+Aria Labels: Required on all icon-only buttons (like the WhatsApp FAB).
+20. Performance Requirements
+Asset Optimization: Next/Image or equivalent for automatic webp conversion and lazy loading.
+Font Loading: Preload primary fonts to prevent FOIT (Flash of Invisible Text).
+JS Bundling: Code-splitting to ensure the initial payload is under 100kb.
+21. Responsive Design Requirements
+Breakpoints: Mobile (<768px), Tablet (768px - 1024px), Desktop (>1024px).
+Mobile Specifics: The navigation must collapse into a clean hamburger menu. The WhatsApp FAB must be prominent and easily tappable with a thumb.
+22. UX Principles
+Zero Friction: The user should never have to think about how to contact the company.
+Show, Don't Tell: Use architecture diagrams and component trees to illustrate "Clean Code" rather than just writing the words.
+Predictability: The layout should follow established SaaS patterns (e.g., Stripe, Linear) so the user intuitively knows where to find information.
+23. UI Guidelines & Design Language
+Theme: Modern Dark Mode (Backgrounds in shades of #0A0A0A to #111111).
+Primary Color: Electric Blue (#007AFF or similar vibrant tech blue).
+Accent: Soft Gradient Blue (mixing primary blue with a deep cyan for hover states).
+Typography: A premium geometric sans-serif (e.g., Inter, Geist) for UI elements. A monospace font (e.g., JetBrains Mono) for code snippets or technical accents.
+Visual Style: Glassmorphism (subtle translucent backgrounds with background-blur), 1px subtle borders on cards, generous padding (padding: 2rem standard), rounded UI (border-radius: 8px to 12px).
+24. CTA Strategy
+Primary Action: "Call Now" (tel:+917670865257 / tel:+919014012864).
+Secondary Action: "Chat on WhatsApp" (Links to WhatsApp API).
+Placement: Global header, floating action button, end of every service page, bottom of the homepage.
+25. Trust Building Strategy
+Explicitly list the 12 Deliverables (Complete Source Code, DB Files, API Docs). This radically differentiates KriveonTech from competitors who hide what the client actually receives.
+Prominently feature the "Knowledge Transfer Session" and "Support Until Viva" to alleviate post-delivery anxiety.
+26. Competitive Positioning
+Unlike traditional project centers that treat projects as commodities, KriveonTech operates as a boutique software agency. The brand signals high-end engineering, transparent workflows, and uncompromising quality. We do not compete on being the "cheapest"; we compete on being the "most reliable and professional."
+27. Risks
+Conversion Tracking: Without form submissions, tracking exact ad conversions (e.g., Google Ads) relies on click-tracking on the Phone/WhatsApp buttons, which is less accurate than a "Thank You" page.
+Spam: Open WhatsApp links can attract generic spam.
+28. Assumptions
+The target audience prefers direct messaging/calling over filling out asynchronous forms.
+The dark-theme, premium aesthetic will resonate positively with engineering students and tech-forward clients.
+29. Future Roadmap (Phase 2 & Potential Additions)
+Once the core platform is established, the following modules can be evaluated for Phase 2:
+Client Portal: A secure login area for clients to track their 8-step project lifecycle in real-time.
+Admin Dashboard: Internal tool for KriveonTech to manage inquiries and update project statuses.
+Portfolio / Case Studies: Detailed write-ups of successful non-NDA projects with architectural breakdowns.
+Payment Gateway: Integration for processing initial milestone payments securely.
+Note: Online Quotation Requests and lengthy forms remain off the roadmap to preserve the direct-contact strategy.
